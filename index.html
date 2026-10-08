@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>MariApps</title>
+<link rel="icon" href="shared/img/icon_ciencias.webp">
+<link rel="apple-touch-icon" href="shared/img/icon_ciencias.webp">
+<link rel="stylesheet" href="shared/kit.css">
+<link rel="stylesheet" href="launcher.css">
+</head>
+<body data-world="home">
+
+<div class="phone" id="phone">
+  <div class="wall"></div>
+  <div class="statusbar">
+    <span id="clock">9:41</span>
+    <span class="sb-name">MariApps</span>
+    <span class="sb-right"><svg class="ico" viewBox="0 0 24 24"><path d="M3 16h3v4H3zM8 12h3v8H8zM13 8h3v12h-3zM18 4h3v16h-3z" fill="currentColor"/></svg><svg class="ico batt" viewBox="0 0 28 14"><rect x="1" y="1" width="22" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3.5" y="3.5" width="17" height="7" rx="1.5" fill="currentColor"/><rect x="24.5" y="4.5" width="2.5" height="5" rx="1" fill="currentColor"/></svg></span>
+  </div>
+
+  <section class="widget" id="widget">
+    <img class="w-avatar" id="w-avatar" src="tablas/assets/img/maria_onepiece.webp" alt="">
+    <div class="w-text">
+      <h2 id="w-hello">¡Hola, María!</h2>
+      <p id="w-sub">Toca una app para empezar</p>
+    </div>
+    <div class="w-stats">
+      <span class="pill" title="Monedas"><svg class="ico"><use href="#i-coin"/></svg><b data-coins>0</b></span>
+      <span class="pill" title="Entradas al Arcade"><svg class="ico"><use href="#i-ticket"/></svg><b data-tickets>0</b></span>
+    </div>
+  </section>
+
+  <div class="apps" id="apps"></div>
+
+  <div class="dock" id="dock"></div>
+</div>
+
+<!-- hoja del álbum de pegatinas -->
+<section class="sheet" id="album">
+  <div class="grabber"></div>
+  <header class="sheet-head">
+    <h2>Mi álbum</h2>
+    <span class="chip"><b data-stickers>0</b>&nbsp;/ <span id="album-total">24</span></span>
+    <button class="iconbtn" id="album-close" aria-label="Cerrar"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
+  </header>
+  <div class="sheet-body" id="album-body"></div>
+</section>
+<div class="dim" id="dim"></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFC72C"/><circle cx="12" cy="12" r="7" fill="none" stroke="#B8860B" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="800" fill="#8a5a00">฿</text></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z" fill="#F52C98"/><path d="M9 7v10" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<script src="shared/kit.js"></script>
+<script src="shared/stickers.js"></script>
+<script src="launcher.js"></script>
+</body>
+</html>

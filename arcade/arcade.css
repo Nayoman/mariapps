@@ -1,0 +1,21 @@
+/* Arcade — lista de minijuegos y zona de juego. */
+.arcade-info { display: flex; align-items: center; gap: 12px; }
+.arcade-info div { flex: 1; }
+.arcade-info > div > b { font-size: 15px; display: block; }
+.arcade-info small { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.arcade-info .ico.big { width: 40px; height: 40px; }
+.games { display: flex; flex-direction: column; gap: 12px; }
+.game-card { border: 0; background: var(--card); border-radius: var(--radius); padding: 12px; display: grid; grid-template-columns: 72px 1fr auto; gap: 12px; align-items: center; text-align: left; color: var(--ink); transition: transform 120ms var(--out); touch-action: manipulation; cursor: pointer; }
+.game-card:active { transform: scale(.97); }
+.game-card img { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,.18); }
+.game-card b { font-size: 17px; font-weight: 900; display: block; }
+.game-card small { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.game-card .cost { background: var(--pink); color: #fff; border-radius: 999px; padding: 6px 10px; font-weight: 800; font-size: 13px; white-space: nowrap; }
+.game-card.locked { opacity: .6; filter: grayscale(.7); }
+.game-card.locked .cost { background: #9aa0ad; }
+.game-card.g-onepiece img { border-color: #FFC72C; }
+.game-card.g-demonslayer img { border-color: #F4A6C8; }
+.game-card.g-haikyuu img { border-color: #F26A1B; }
+.game-card.g-mha img { border-color: #2BA84A; }
+.play-area { flex: 1; min-height: 0; position: relative; }
+.play-area > div { position: absolute; inset: 0; }

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>Arcade</title>
+<link rel="icon" href="../shared/img/icon_arcade.webp">
+<link rel="stylesheet" href="../shared/kit.css">
+<link rel="stylesheet" href="arcade.css">
+</head>
+<body data-world="home">
+
+<section class="screen active" id="s-list">
+  <div class="bg" style="background-image:url(../tablas/assets/img/bg_home.webp)"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="btn-back" aria-label="Volver"><svg class="ico"><use href="#i-back"/></svg></button>
+    <h3>Arcade</h3>
+    <span class="pill"><svg class="ico"><use href="#i-coin"/></svg><b data-coins>0</b></span>
+  </header>
+  <div class="scroll">
+    <div class="card arcade-info">
+      <div><b>Cada partida: 1 entrada o 100 monedas</b><small>Tienes <b data-tickets>0</b> entradas. Las ganas venciendo a los jefes.</small></div>
+      <svg class="ico big"><use href="#i-ticket"/></svg>
+    </div>
+    <div class="games" id="games-list"></div>
+  </div>
+</section>
+
+<section class="screen" id="s-play">
+  <header class="topbar">
+    <button class="iconbtn" id="play-back" aria-label="Salir"><svg class="ico"><use href="#i-back"/></svg></button>
+    <h3 id="play-title">Juego</h3>
+    <span></span>
+  </header>
+  <div class="play-area" id="play-area"></div>
+</section>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFC72C"/><circle cx="12" cy="12" r="7" fill="none" stroke="#B8860B" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="800" fill="#8a5a00">฿</text></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z" fill="#F52C98"/><path d="M9 7v10" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<script src="../shared/kit.js"></script>
+<script src="../shared/stickers.js"></script>
+<script src="vendor/kaplay.js"></script>
+<script src="juice.js"></script>
+<script src="games/pacman.js"></script>
+<script src="games/tetris.js"></script>
+<script src="games/volley.js"></script>
+<script src="games/slash.js"></script>
+<script src="games/flappy.js"></script>
+<script src="games/runner.js"></script>
+<script src="games/whack.js"></script>
+<script src="games/memory.js"></script>
+<script src="arcade.js"></script>
+</body>
+</html>

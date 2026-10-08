@@ -1,0 +1,61 @@
+/* MariApps — la pantalla de inicio del «móvil» de María (estilo iPhone sobre fondo anime). */
+.phone { position: fixed; inset: 0; display: flex; flex-direction: column; padding: calc(var(--sat) + 6px) 18px calc(var(--sab) + 14px); color: #fff; }
+.wall { position: absolute; inset: 0; z-index: -1; background: #0b1020 url(tablas/assets/img/bg_home.webp) center / cover no-repeat; }
+.wall.ready { background-image: url(shared/img/wallpaper.webp); }
+.wall::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,0) 25%, rgba(0,0,0,0) 70%, rgba(0,0,0,.35)); }
+
+.statusbar { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 15px; text-shadow: 0 1px 4px rgba(0,0,0,.5); padding: 4px 6px 0; }
+.statusbar .sb-name { font-size: 12px; letter-spacing: .18em; opacity: .85; }
+.statusbar .sb-right { display: inline-flex; align-items: center; gap: 6px; }
+.statusbar .ico { width: 18px; height: 18px; }
+.statusbar .batt { width: 26px; height: 14px; }
+
+.widget { margin-top: 14px; background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: var(--ink); border-radius: 22px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; animation: cardIn 240ms var(--out); }
+.widget .w-avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,.2); flex: none; }
+.widget .w-text { flex: 1; min-width: 0; }
+.widget h2 { font-size: 19px; font-weight: 900; }
+.widget p { font-size: 13px; color: var(--muted); }
+.widget .w-stats { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+.widget .pill { min-height: 32px; padding: 4px 10px 4px 6px; font-size: 14px; background: #fff; }
+
+.apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 8px; margin-top: 26px; padding: 0 2px; }
+.appicon { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; padding: 0; color: #fff; font-size: 12px; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,.65); touch-action: manipulation; cursor: pointer; animation: cardIn 220ms var(--out) both; animation-delay: calc(var(--i, 0) * 35ms); }
+.appicon .ic { width: 64px; height: 64px; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,.32); transition: transform 120ms var(--out); background: #fff; display: grid; place-items: center; font-size: 30px; }
+.appicon:active .ic { transform: scale(.9); }
+.appicon .ic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.appicon .ic.soon { background: rgba(255,255,255,.28); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: none; }
+.appicon.soon { opacity: .75; }
+.appicon .badge { position: absolute; top: -6px; right: -6px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--bad); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; padding: 0 6px; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.appicon .icwrap { position: relative; }
+
+.dock { margin-top: auto; background: rgba(255,255,255,.26); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border-radius: 30px; padding: 12px 10px; display: flex; justify-content: space-around; align-items: center; }
+.dock .appicon { gap: 0; }
+.dock .appicon span { display: none; }
+.dock .iconbtn { width: 56px; height: 56px; background: rgba(255,255,255,.9); }
+.dock .iconbtn .ico { width: 26px; height: 26px; }
+
+/* animación de apertura: el icono crece hasta llenar la pantalla */
+.opener { position: fixed; z-index: 90; border-radius: 16px; overflow: hidden; background: #fff; will-change: transform; transition: transform 280ms var(--ios), border-radius 280ms var(--ios); pointer-events: none; }
+.opener img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.opener.go { border-radius: 0; }
+
+/* hoja del álbum */
+.dim { position: fixed; inset: 0; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity 200ms ease; z-index: 84; }
+.dim.show { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; height: 88vh; height: 88dvh; background: #fff; color: var(--ink); border-radius: 28px 28px 0 0; transform: translateY(100%); transition: transform 320ms var(--ios); z-index: 85; display: flex; flex-direction: column; box-shadow: 0 -10px 40px rgba(0,0,0,.3); }
+.sheet.show { transform: none; }
+.sheet .grabber { width: 44px; height: 5px; border-radius: 3px; background: #d8dbe3; margin: 10px auto 0; }
+.sheet-head { display: flex; align-items: center; gap: 10px; padding: 10px 16px 6px; }
+.sheet-head h2 { flex: 1; font-size: 22px; font-weight: 900; }
+.sheet-body { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 6px 16px calc(var(--sab) + 24px); display: flex; flex-direction: column; gap: 14px; }
+.album-series h3 { font-size: 15px; font-weight: 900; margin: 6px 0 8px; display: flex; align-items: center; gap: 8px; }
+.album-series h3 i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sticker { border: 0; background: #f2f4f8; border-radius: 18px; padding: 8px 6px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: var(--ink); transition: transform 120ms var(--out); touch-action: manipulation; }
+.sticker:active { transform: scale(.95); }
+.sticker img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.15); }
+.sticker.locked img { filter: grayscale(1) brightness(.35); }
+.sticker.locked { color: var(--muted); }
+.sticker.new::after { content: "¡NUEVA!"; font-size: 10px; color: #fff; background: var(--pink); border-radius: 999px; padding: 2px 8px; }
+
+@media (prefers-reduced-motion: reduce) { .opener { transition: none; } .sheet { transition: none; } .appicon, .widget { animation: none; } }

@@ -1,0 +1,79 @@
+/* MariApps — TABLET (Bernardo, 10-oct: «para pulsar botones tiene que hacer scroll»). Lo cargan Ciencias y Natural Science.
+   Apaisada: pregunta a la izquierda, respuestas a la derecha y el botón abajo a la derecha; inicio y mundo en dos columnas.
+   Vertical (tablet o móvil): el botón de abajo («Comprobar», «Seguir») se queda fijo a la vista. */
+
+/* ---------- vertical: botón fijo abajo ---------- */
+@media (orientation: portrait) {
+  #q-actions:not(:empty) { position: sticky; bottom: 0; z-index: 5; padding-top: 6px; }
+}
+
+/* ---------- apaisada (tablet o portátil, hasta 900 px de alto) ---------- */
+@media (orientation: landscape) and (max-height: 900px) {
+  /* inicio */
+  .hello { padding: 10px 14px; }
+  .worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .world-card { padding: 10px; grid-template-columns: 64px 1fr; }
+  .world-card img { width: 64px; height: 64px; }
+  .home-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .home-btns .row2 { display: contents; }
+  .home-btns .btn-xl { min-height: 54px; font-size: 18px; }
+  .start-wrap { justify-content: center; gap: 10px; }
+  .start-title h1 { font-size: 36px; }
+  .start-heroes .hero { width: 64px; height: 64px; }
+
+  /* mundo: mascota y progreso a la izquierda, los modos a la derecha */
+  #s-world .scroll { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); grid-template-rows: auto auto 1fr; column-gap: 14px; row-gap: 10px; align-content: start; }
+  .world-mascot { grid-column: 1; grid-row: 1; }
+  .world-mascot img { width: 84px; height: 84px; }
+  .world-prog { grid-column: 1; grid-row: 2; }
+  #btn-quick { grid-column: 1; grid-row: 3; align-self: start; }
+  .modes { grid-column: 2; grid-row: 1 / 4; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-content: start; }
+  .modes .tile { min-height: 88px; padding: 10px 12px; }
+  .modes .tile b { font-size: 16px; }
+  .modes .tile .t-emoji { font-size: 26px; }
+
+  /* preguntas */
+  .quiz-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 16px; row-gap: 8px; align-content: start; padding-top: 4px; }
+  .quiz-body .mascot { grid-column: 1; grid-row: 1; justify-content: flex-start; }
+  .quiz-body .mascot img { width: 56px; height: 56px; }
+  .quiz-body .mascot .bubble { max-width: none; font-size: 14px; padding: 8px 12px; }
+  #q-area { grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-auto-flow: row dense; column-gap: 16px; row-gap: 10px; align-items: start; align-content: start; }
+  #q-area > .qkind, #q-area > .qcard, #q-area > .conf, #q-area > .q-why, #q-area > .tray, #q-area > .sort-item, #q-area > .sort-left { grid-column: 1; }
+  #q-area > .choices, #q-area > .chips, #q-area > .bins, #q-area > .scene { grid-column: 2; grid-row: 1 / span 8; align-self: start; }
+  #q-area > .qcard.teach { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto auto 1fr; column-gap: 16px; row-gap: 6px; text-align: left; align-items: start; }
+  .qcard.teach .period { grid-column: 1 / -1; justify-self: center; }
+  .qcard.teach .scene, .qcard.teach .t-scene, .qcard.teach .t-img { grid-column: 1; grid-row: 2 / span 4; max-height: none; align-self: start; }
+  .qcard.teach .t-name, .qcard.teach .t-es, .qcard.teach .t-def { grid-column: 2; }
+  .qcard.teach .t-name { font-size: 26px; }
+  #q-actions { grid-column: 2; grid-row: 3; }
+  .qtext { font-size: 19px; }
+  .qcard { padding: 12px 14px; }
+  .choice { min-height: 48px; padding: 8px 14px; font-size: 16px; }
+  .write { min-height: 72px; }
+  .chipbtn { padding: 8px 14px; font-size: 15px; }
+  .bin { min-height: 72px; }
+  .btn-xl { min-height: 54px; font-size: 19px; }
+
+  /* jefe: el jefe a la izquierda; tiempo, pregunta y respuestas a la derecha */
+  .battle-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); grid-template-rows: auto auto 1fr; column-gap: 12px; row-gap: 10px; align-content: start; padding-right: 16px; }
+  .boss { grid-column: 1; grid-row: 1 / 4; }
+  .boss img#boss-img { width: 120px; height: 120px; }
+  .timerbar { grid-column: 2; grid-row: 1; margin: 0; }
+  .qcard.small { grid-column: 2; grid-row: 2; margin: 0; }
+  #b-choices { grid-column: 2; grid-row: 3; padding: 0; align-content: start; align-self: start; }
+
+  /* resultado: botones en dos columnas y dibujo más bajo */
+  .result-card { max-width: 600px; padding: 14px; gap: 8px; }
+  .result-card .result-img { max-height: 110px; }
+  .result-card h2 { font-size: 22px; }
+  .big-num { font-size: 44px; }
+  .result-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .result-btns .btn { width: auto; min-height: 50px; font-size: 17px; }
+  .result-list { max-height: 90px; overflow-y: auto; }
+
+  /* sobres y chistes */
+  .sobre-card { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 520px; text-align: left; }
+  .sobre-card img, #joke .sobre-card img { width: 120px; height: 120px; }
+  .sobre-card h2, .sobre-card p { flex: 1 1 60%; }
+  .sobre-card .btn { flex: 1 1 100%; }
+}

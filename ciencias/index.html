@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>Ciencias Sociales</title>
+<link rel="icon" href="../shared/img/icon_ciencias.webp">
+<link rel="apple-touch-icon" href="../shared/img/icon_ciencias.webp">
+<link rel="stylesheet" href="../shared/kit.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../shared/tablet.css">
+</head>
+<body data-world="home">
+
+<!-- ===== INICIO ===== -->
+<section class="screen active" id="s-start">
+  <div class="bg" style="background-image:url(assets/img/bg_mha.webp)"></div>
+  <div class="start-wrap">
+    <div class="start-title">
+      <span class="kicker">LA AVENTURA DE</span>
+      <h1>Ciencias<br>Sociales</h1>
+      <p class="sub">La Tierra, la montaña, la llanura y la costa con Ochaco, Tanjiro, Hinata y Nami.</p>
+    </div>
+    <div class="start-heroes">
+      <img src="assets/img/ch_ochaco.webp" alt="Ochaco" class="hero h1">
+      <img src="../tablas/assets/img/ch_tanjiro.webp" alt="Tanjiro" class="hero h2">
+      <img src="../tablas/assets/img/ch_hinata.webp" alt="Hinata" class="hero h3">
+      <img src="../tablas/assets/img/ch_nami.webp" alt="Nami" class="hero h4">
+    </div>
+    <button class="btn btn-xl btn-start" id="btn-start">¡EMPEZAR!</button>
+    <p class="tiny">Toca para activar la música y la voz</p>
+  </div>
+</section>
+
+<!-- ===== HOME ===== -->
+<section class="screen" id="s-home">
+  <div class="bg" style="background-image:url(assets/img/bg_mha.webp)"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="btn-home" aria-label="Volver al móvil">🏠</button>
+    <div class="pill"><svg class="ico"><use href="#i-coin"/></svg><b data-coins>0</b></div>
+    <div class="pill" title="Entradas al Arcade"><svg class="ico"><use href="#i-ticket"/></svg><b data-tickets>0</b></div>
+    <span id="radio-slot" style="width:auto"></span>
+    <button class="iconbtn" id="btn-sound" aria-label="Sonido"><svg class="ico"><use href="#i-sound"/></svg></button>
+  </header>
+  <div class="scroll">
+    <div class="hello card">
+      <div class="ring" id="goal-ring" style="--p:0"><span id="goal-txt">0</span></div>
+      <div class="hello-text"><h2 id="hello-title">¡Hola, María!</h2><p class="muted" id="hello-sub">Objetivo de hoy: 40 aciertos</p></div>
+      <img class="hello-img" src="assets/img/maria_mha.webp" alt="">
+    </div>
+    <div class="worlds" id="worlds"></div>
+    <div class="home-btns">
+      <button class="btn btn-accent btn-xl" id="btn-exam">Examen de prueba</button>
+      <div class="row2">
+        <button class="btn btn-ghost" id="btn-worst">Lo que más fallo</button>
+        <button class="btn btn-game" id="btn-arcade">Arcade</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MUNDO ===== -->
+<section class="screen" id="s-world">
+  <div class="bg" id="world-bg"></div>
+  <header class="topbar"><button class="iconbtn" data-go="home"><svg class="ico"><use href="#i-back"/></svg></button><h3 id="world-title">Mundo</h3><div class="pill"><svg class="ico"><use href="#i-coin"/></svg><b data-coins>0</b></div></header>
+  <div class="scroll">
+    <div class="mascot world-mascot"><div class="bubble show" id="world-bubble">¡Vamos!</div><img id="world-hero" src="" alt=""></div>
+    <div class="card world-prog"><div class="stars" id="world-stars"></div><div class="bar"><i id="world-bar"></i></div><small id="world-sub" class="muted">0 de 10 conceptos dominados</small></div>
+    <button class="btn btn-quick" id="btn-quick">¿Ya lo sabes? Demuéstralo</button>
+    <div class="tiles modes" id="modes"></div>
+  </div>
+</section>
+
+<!-- ===== PREGUNTAS (todos los modos) ===== -->
+<section class="screen" id="s-quiz">
+  <div class="bg" id="quiz-bg"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="quiz-back"><svg class="ico"><use href="#i-back"/></svg></button>
+    <div class="progress" id="quiz-progress"></div>
+    <div class="pill streak" id="streak-pill"><svg class="ico"><use href="#i-flame"/></svg><b id="streak">0</b></div>
+  </header>
+  <div class="quiz-body">
+    <div class="mascot" id="mascot"><div class="bubble" id="bubble">¡Tú puedes!</div><div class="mascot-pic"><img id="mascot-img" src="" alt=""><span class="mascot-name" id="mascot-name"></span></div></div>
+    <div id="q-area"></div>
+    <div id="q-actions"></div>
+  </div>
+</section>
+
+<!-- ===== JEFE ===== -->
+<section class="screen" id="s-battle">
+  <div class="bg" id="battle-bg"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="battle-back"><svg class="ico"><use href="#i-back"/></svg></button>
+    <h3 id="battle-title">Jefe</h3>
+    <div class="hearts" id="hearts"></div>
+  </header>
+  <div class="battle-body">
+    <div class="boss" id="boss">
+      <div class="hpbar"><div class="hp" id="boss-hp"></div></div>
+      <img id="boss-img" src="" alt="">
+      <span class="boss-name" id="boss-name"></span>
+      <div class="fighter"><img id="fighter-img" src="assets/img/maria_mha.webp" alt=""><span>María</span></div>
+    </div>
+    <div class="timerbar"><div id="timer-fill"></div></div>
+    <div class="qcard small"><div class="qtext" id="b-q"></div></div>
+    <div class="choices" id="b-choices"></div>
+  </div>
+</section>
+
+<!-- ===== RESULTADO ===== -->
+<section class="screen" id="s-result">
+  <div class="bg" id="result-bg"></div>
+  <div class="result-wrap">
+    <div class="result-card" id="result-card">
+      <img id="result-img" src="" alt="" class="result-img">
+      <h2 id="result-title">¡Ronda superada!</h2>
+      <div class="stars" id="result-stars"></div>
+      <div class="big-num hidden" id="result-nota"></div>
+      <p id="result-sub" class="muted"></p>
+      <div class="result-list" id="result-list"></div>
+      <div class="result-btns">
+        <button class="btn btn-accent btn-xl" id="result-again">Otra vez</button>
+        <button class="btn btn-ok" id="result-next">Seguir</button>
+        <button class="btn btn-game" id="result-arcade">Arcade</button>
+        <button class="btn btn-ghost" data-go="home">Volver</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIERRA Y AGUA (Montessori) ===== -->
+<section class="screen" id="s-forms">
+  <div class="bg" id="forms-bg"></div>
+  <header class="topbar"><button class="iconbtn" id="forms-back"><svg class="ico"><use href="#i-back"/></svg></button><h3>Tierra y agua</h3><span></span></header>
+  <div class="scroll" id="forms-list"></div>
+</section>
+
+<!-- ===== SOBRE SORPRESA ===== -->
+<div class="sobre" id="sobre">
+  <div class="sobre-card">
+    <img id="sobre-img" src="assets/img/img_sobre.webp" alt="">
+    <h2 id="sobre-title">¡Sobre sorpresa!</h2>
+    <p id="sobre-txt">Toca el sobre para abrirlo</p>
+    <button class="btn btn-accent hidden" id="sobre-ok">¡Genial!</button>
+  </div>
+</div>
+
+<!-- ===== CHISTE ENTRE EJERCICIOS ===== -->
+<div class="sobre" id="joke">
+  <div class="sobre-card">
+    <img id="joke-img" class="reveal" src="" alt="">
+    <h2 id="joke-title">Chiste</h2>
+    <p id="joke-q"></p>
+    <p id="joke-a" class="joke-a hidden"></p>
+    <button class="btn btn-accent hidden" id="joke-ok">¡Jaja! Seguir</button>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFC72C"/><circle cx="12" cy="12" r="7" fill="none" stroke="#B8860B" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="800" fill="#8a5a00">฿</text></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z" fill="#F52C98"/><path d="M9 7v10" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 2"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-10z" fill="#FF6B00"/><path d="M12 22a3 3 0 0 1-3-3c0-1.5 1-2.5 1.5-3.5.5 1.5 1.5 2 1.5 2 .5-1 .5-2.5 1-3.5 1 1.5 2 2.5 2 5a3 3 0 0 1-3 3z" fill="#FFD166"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-9a5 5 0 0 1 9-4 5 5 0 0 1 9 4c-2 4.5-9 9-9 9z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z" fill="currentColor"/></symbol>
+</svg>
+
+<script src="../shared/config.js"></script>
+<script src="../shared/kit.js"></script>
+<script src="../shared/stickers.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

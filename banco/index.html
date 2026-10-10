@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>Banco de María</title>
+<link rel="icon" href="../shared/img/icon_banco.webp">
+<link rel="apple-touch-icon" href="../shared/img/icon_banco.webp">
+<link rel="stylesheet" href="../shared/kit.css">
+<link rel="stylesheet" href="banco.css">
+</head>
+<body data-world="home">
+<section class="screen active" id="s-bank">
+  <div class="bg" style="background-image:url(../tablas/assets/img/bg_home.webp)"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="btn-home" aria-label="Volver al móvil">🏠</button>
+    <h3>Banco de María</h3>
+    <button class="iconbtn" id="btn-sound" aria-label="Sonido"><svg class="ico"><use href="#i-sound"/></svg></button>
+  </header>
+  <div class="scroll">
+    <div class="card money">
+      <div class="money-col"><small>En tu hucha</small><b class="num"><svg class="ico"><use href="#i-coin"/></svg><span data-coins>0</span></b><small class="muted">para gastar en el Arcade</small></div>
+      <div class="money-arrow" id="arrow">⇄</div>
+      <div class="money-col bank"><small>En el banco</small><b class="num"><span>🏦</span><span data-saved>0</span></b><small class="muted" id="interest-today">+0 mañana</small></div>
+    </div>
+    <div class="card actions">
+      <div class="act-title">Guardar en el banco</div>
+      <div class="act-row" id="dep-row"><button class="btn btn-sm btn-ok" data-dep="100">100</button><button class="btn btn-sm btn-ok" data-dep="500">500</button><button class="btn btn-sm btn-ok" data-dep="1000">1000</button><button class="btn btn-sm btn-ok" data-dep="all">Todo</button></div>
+      <div class="act-title">Sacar del banco</div>
+      <div class="act-row" id="wd-row"><button class="btn btn-sm btn-ghost" data-wd="100">100</button><button class="btn btn-sm btn-ghost" data-wd="500">500</button><button class="btn btn-sm btn-ghost" data-wd="all">Todo</button></div>
+    </div>
+    <div class="card explain">
+      <div class="ex-head"><h2>¿Qué es el interés?</h2><button class="iconbtn" id="btn-explain" aria-label="Escuchar">🔊</button></div>
+      <p>Cada día que tus monedas <b>duermen en el banco</b>, el banco te <b>regala 1 de cada 100</b>. Eso se llama <b>interés</b>.</p>
+      <p>Y al día siguiente te paga interés también por el regalo de ayer: tus monedas crecen <b>cada vez más rápido</b>, sin hacer nada. ¡Trabajan para ti mientras duermes!</p>
+      <p class="muted small">Si las sacas, dejan de crecer. Si las dejas, crecen solas.</p>
+    </div>
+    <div class="card calc">
+      <h2>La calculadora mágica</h2>
+      <p class="muted">Si guardas <input type="number" id="calc-amount" min="0" step="100" inputmode="numeric"> monedas durante…</p>
+      <div class="days" id="days"><button data-d="7" class="on">7 días</button><button data-d="30">30 días</button><button data-d="90">90 días</button><button data-d="365">1 año</button></div>
+      <div class="calc-result"><span>tendrás</span><b id="calc-total">0</b><span id="calc-gift" class="gift">+0 de regalo</span></div>
+      <div class="chart" id="chart"></div>
+    </div>
+    <div class="card goal">
+      <h2>Mi objetivo de ahorro</h2>
+      <div class="goal-row"><input type="number" id="goal-in" min="0" step="100" inputmode="numeric" placeholder="¿Cuántas monedas?"><button class="btn btn-sm btn-accent" id="goal-set">Guardar</button></div>
+      <div class="bar"><i id="goal-bar"></i></div>
+      <p class="muted" id="goal-txt">Ponte un objetivo y te digo cuándo llegarás.</p>
+    </div>
+    <div class="card history">
+      <h2>Lo que te ha pagado el banco</h2>
+      <div id="history"></div>
+    </div>
+  </div>
+</section>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFC72C"/><circle cx="12" cy="12" r="7" fill="none" stroke="#B8860B" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="800" fill="#8a5a00">฿</text></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<script src="../shared/config.js"></script>
+<script src="../shared/kit.js"></script>
+<script src="banco.js"></script>
+</body>
+</html>

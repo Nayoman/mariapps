@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>Mundos de María</title>
+<link rel="icon" href="shared/img/icon_juego.webp">
+<link rel="stylesheet" href="shared/kit.css">
+<style>
+  /* AR-D1: la versión web de «Mundos de María» (Godot, carpeta juego/) se abre aquí dentro para que descuente tiempo de juego. */
+  .game-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .game-frame { flex: 1; min-height: 0; border: 0; width: 100%; background: #000; }
+  .game-card { background: var(--card); border-radius: var(--radius); padding: 22px 18px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; margin: auto 16px; }
+  .game-card .big { font-size: 64px; line-height: 1; }
+  .game-card h2 { font-size: 24px; font-weight: 900; }
+  .game-card p { font-size: 16px; line-height: 1.4; color: var(--muted); }
+  .topbar.slim { padding-top: calc(var(--sat) + 6px); padding-bottom: 6px; }
+</style>
+</head>
+<body data-world="home">
+<section class="screen active" id="s-game">
+  <div class="bg" style="background-image:url(tablas/assets/img/bg_home.webp)"></div>
+  <header class="topbar slim">
+    <button class="iconbtn" id="btn-back" aria-label="Volver">🏠</button>
+    <h3>Mundos de María</h3>
+    <span class="pill time" title="Tiempo de juego que te queda">🕹️<b data-playtime>0:00</b></span>
+  </header>
+  <div class="game-wrap" id="wrap"></div>
+</section>
+<script src="shared/config.js"></script>
+<script src="shared/kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  const { $, Audio, Nav, Time } = MK;
+  const wrap = $('#wrap');
+  $('#btn-back').addEventListener('click', () => { Time.playing(false); Time.save(); Nav.home(); });
+  function card(emoji, title, text) {
+    wrap.innerHTML = `<div class="game-card"><div class="big">${emoji}</div><h2>${title}</h2><p>${text}</p><button class="btn btn-accent btn-xl" id="go-ciencias">Ciencias Sociales</button><button class="btn btn-ghost btn-xl" id="go-natural">Natural Science</button></div>`;
+    $('#go-ciencias').addEventListener('click', () => Nav.go('ciencias/index.html')); $('#go-natural').addEventListener('click', () => Nav.go('natural/index.html'));
+  }
+  Time.render();
+  if (!Time.canPlay(20)) { card('⏱️', 'No te queda tiempo de juego', 'Cada 4 minutos de estudio te dan 1 minuto de juego. ¡A estudiar un poco y vuelves!'); return; }
+  const fr = document.createElement('iframe'); fr.className = 'game-frame'; fr.src = 'juego/index.html'; fr.allow = 'autoplay; fullscreen; gamepad'; fr.setAttribute('allowfullscreen', '');
+  wrap.appendChild(fr);
+  Time.playing(true);
+  Time.on(ev => { if (ev === 'timeout') { Time.playing(false); Time.save(); fr.remove(); Audio.unlock(); Audio.sfx('ding', .8); card('⏱️', 'Se acabó el tiempo de juego', 'Has gastado tus minutos. Estudia un poco más y vuelves a jugar: cada 4 minutos de estudio son 1 de juego.'); } });
+  window.addEventListener('pagehide', () => { Time.playing(false); Time.save(); });
+})();
+</script>
+</body>
+</html>

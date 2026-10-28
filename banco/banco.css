@@ -1,0 +1,47 @@
+/* Banco de María — estilos propios (lo común está en ../shared/kit.css). */
+.card h2 { font-size: 19px; font-weight: 900; margin-bottom: 6px; }
+.card p { font-size: 15px; line-height: 1.4; margin-top: 6px; }
+.card p.small { font-size: 13px; }
+.money { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.money-col { display: flex; flex-direction: column; gap: 2px; align-items: center; text-align: center; }
+.money-col small { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.money-col .num { display: inline-flex; align-items: center; gap: 6px; font-size: 30px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.money-col.bank .num { color: #0f766e; }
+.money-arrow { font-size: 28px; color: var(--muted); }
+.actions { display: flex; flex-direction: column; gap: 8px; }
+.act-title { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.act-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.act-row .btn { padding: 0 8px; }
+#wd-row { grid-template-columns: repeat(3, 1fr); }
+.explain .ex-head { display: flex; align-items: center; gap: 10px; }
+.explain .ex-head h2 { flex: 1; margin: 0; }
+.explain .iconbtn { background: #eef1f7; font-size: 20px; }
+.explain b { color: #0f766e; }
+.calc input, .goal input { width: 110px; border: 2px solid #e3e6ee; border-radius: 12px; padding: 6px 10px; font: inherit; font-size: 17px; font-weight: 800; color: var(--ink); text-align: center; -webkit-user-select: text; user-select: text; }
+.calc input:focus, .goal input:focus { outline: 0; border-color: var(--accent); }
+.days { display: flex; gap: 6px; margin-top: 8px; }
+.days button { flex: 1; border: 2px solid #e3e6ee; background: #fff; border-radius: 999px; padding: 8px 0; font-weight: 800; font-size: 13px; color: var(--muted); transition: transform 120ms var(--out), background 150ms ease, color 150ms ease; touch-action: manipulation; }
+.days button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.days button:active { transform: scale(.95); }
+.calc-result { display: flex; align-items: baseline; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+.calc-result b { font-size: 36px; font-weight: 900; color: #0f766e; font-variant-numeric: tabular-nums; }
+.calc-result .gift { background: #dcfce7; color: #15803d; border-radius: 999px; padding: 4px 10px; font-weight: 800; font-size: 13px; }
+.chart { display: flex; align-items: flex-end; gap: 8px; height: 110px; margin-top: 12px; padding: 0 4px; }
+.chart .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.chart .bar-col i { display: block; width: 100%; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #34d399, #0f766e); transition: height 400ms var(--out); min-height: 4px; }
+.chart .bar-col i.base { background: linear-gradient(180deg, #cbd5e1, #94a3b8); }
+.chart .bar-col small { font-size: 11px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+.chart .bar-col b { font-size: 11px; font-weight: 900; color: #0f766e; }
+.goal-row { display: flex; gap: 8px; align-items: center; }
+.goal-row input { flex: 1; width: auto; text-align: left; }
+.goal .bar { height: 10px; background: #e8ebf2; border-radius: 999px; overflow: hidden; margin-top: 10px; }
+.goal .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #34d399, #0f766e); border-radius: 999px; transition: width 400ms var(--out); }
+.history .row { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #eef1f7; }
+.history .row b { color: #15803d; }
+.history .empty { font-size: 14px; color: var(--muted); }
+
+/* tablet o pantalla ancha: dos columnas (Bernardo, 10-oct) */
+@media (min-width: 700px) {
+  #s-bank .scroll { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
+  .money { grid-column: 1 / -1; }
+}

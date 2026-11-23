@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>Mi hucha</title>
+<link rel="icon" href="../shared/img/icon_banco.webp">
+<link rel="stylesheet" href="../shared/kit.css?v=20261013">
+<link rel="stylesheet" href="hucha.css?v=20261123">
+</head>
+<body data-world="home">
+<!-- La hucha de casa (M15, PR-D3…PR-D10). Apagada (lo normal en cualquier aparato) solo enseña «cosa de mayores». -->
+<section class="screen active" id="s-hucha">
+  <div class="bg" style="background-image:url(../tablas/assets/img/bg_home.webp)"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="btn-home" aria-label="Volver al móvil">🏠</button>
+    <h3 data-con="La hucha de {n}" data-sin="Mi hucha">Mi hucha</h3>
+    <button class="iconbtn" id="btn-mayores" aria-label="Para mayores">⚙️</button>
+  </header>
+  <div class="scroll">
+    <div class="hu-grid" id="hu-on" hidden>
+      <div class="card hu-have">
+        <div class="hu-pig">🐷</div>
+        <div class="hu-num"><b id="hu-credits">0</b><span id="hu-credits-w">créditos</span></div>
+        <p id="hu-grown" class="hu-grown"></p>
+      </div>
+      <div class="card hu-today">
+        <h2 id="hu-day">Hoy</h2>
+        <p id="hu-price" class="muted"></p>
+        <div class="hu-big"><b id="hu-mins">0</b><span id="hu-mins-w">minutos hoy</span></div>
+        <div class="hu-wait" id="hu-wait"></div>
+        <div class="hu-strip" id="hu-strip"></div>
+      </div>
+      <div class="card hu-use">
+        <p id="hu-left"></p>
+        <div class="hu-btns"><button class="btn btn-accent" id="hu-play">🕹️ Jugar</button><button class="btn btn-yt" id="hu-yt">▶️ YouTube</button></div>
+        <p id="hu-vale" class="hu-vale" hidden></p>
+      </div>
+      <div class="card hu-how">
+        <h2>Cómo crece tu hucha</h2>
+        <ul>
+          <li><b>Estudia:</b> cada ronda bien hecha (7 aciertos de 10) te da <b>1 crédito</b>. Cada ejercicio paga una vez al día.</li>
+          <li><b>Espera:</b> cada noche la hucha te regala <b>1 crédito por cada 10</b> que guardes (hasta 5).</li>
+          <li><b>Elige el día:</b> sábado y domingo, 1 crédito = 1 minuto. De lunes a viernes, 1 minuto cuesta 2.</li>
+        </ul>
+        <div id="hu-hist" class="hu-hist"></div>
+      </div>
+    </div>
+    <div class="card hu-lock" id="hu-off" hidden>
+      <div class="hu-pig">🔒</div>
+      <h2>Cosa de mayores</h2>
+      <p class="muted">Aquí no hay nada que tocar. Vuelve al móvil y sigue estudiando y jugando.</p>
+      <button class="btn btn-accent btn-xl" id="hu-back">Volver al móvil</button>
+    </div>
+  </div>
+</section>
+
+<!-- la clave de mayores -->
+<div class="hu-modal" id="pin" hidden>
+  <div class="hu-box">
+    <h2>Clave de mayores</h2>
+    <div class="hu-dots" id="pin-dots"><i></i><i></i><i></i><i></i></div>
+    <p class="muted" id="pin-msg">Escribe la clave de 4 cifras</p>
+    <div class="hu-keys" id="pin-keys"></div>
+    <button class="btn btn-ghost" id="pin-cancel">Cancelar</button>
+  </div>
+</div>
+
+<!-- lo que solo tocan los mayores -->
+<div class="hu-modal" id="panel" hidden>
+  <div class="hu-box">
+    <h2>Hucha de casa</h2>
+    <p class="muted" id="pn-state"></p>
+    <button class="btn btn-xl" id="pn-toggle"></button>
+    <div class="hu-cap"><span>Tope de lunes a viernes</span><div><button class="btn btn-sm btn-ghost" data-cap="wk" data-d="-5">−5</button><b id="pn-wk">20</b><small>min</small><button class="btn btn-sm btn-ghost" data-cap="wk" data-d="5">+5</button></div></div>
+    <div class="hu-cap"><span>Tope sábado y domingo</span><div><button class="btn btn-sm btn-ghost" data-cap="we" data-d="-5">−5</button><b id="pn-we">45</b><small>min</small><button class="btn btn-sm btn-ghost" data-cap="we" data-d="5">+5</button></div></div>
+    <p class="muted small" id="pn-info"></p>
+    <button class="btn btn-accent" id="pn-close">Hecho</button>
+  </div>
+</div>
+
+<script src="../shared/config.js"></script>
+<script src="../shared/kit.js?v=20261123"></script>
+<script src="hucha.js?v=20261123"></script>
+</body>
+</html>

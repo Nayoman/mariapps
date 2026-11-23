@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1020">
+<meta name="robots" content="noindex">
+<title>YouTube · premio</title>
+<link rel="icon" href="shared/img/icon_youtube.webp">
+<link rel="stylesheet" href="shared/kit.css">
+<style>
+  /* PR-D1/PR-D2: un 10 en el examen = minutos de YouTube. Se abre YouTube de verdad (libre, de confianza); los minutos corren con el reloj
+     aunque MariApps quede detrás. La web no puede cerrar YouTube: cuando se acaba el tiempo, esta pantalla lo dice al volver. */
+  .yt-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0 16px calc(var(--sab) + 16px); gap: 12px; }
+  .yt-card { background: var(--card); border-radius: var(--radius); padding: 22px 18px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; margin: auto 0; }
+  .yt-card .big { font-size: 64px; line-height: 1; }
+  .yt-card h2 { font-size: 24px; font-weight: 900; }
+  .yt-card p { font-size: 16px; line-height: 1.4; color: var(--muted); }
+  .yt-card .count { font-size: 56px; font-weight: 900; color: #c4302b; font-variant-numeric: tabular-nums; line-height: 1; }
+  .yt-card .count.low { color: #be123c; animation: pulse 900ms var(--out) infinite; }
+  .btn-yt { background: #ff0033; }
+  .pill.time b { font-variant-numeric: tabular-nums; }
+  .yt-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; width: 100%; }
+  .yt-opts .btn { min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; line-height: 1.15; padding: 6px 4px; }
+  .yt-opts small { font-size: 12px; font-weight: 700; opacity: .92; }
+  .yt-src { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+</style>
+</head>
+<body data-world="home">
+<section class="screen active" id="s-yt">
+  <div class="bg" style="background-image:url(tablas/assets/img/bg_home.webp)"></div>
+  <header class="topbar">
+    <button class="iconbtn" id="btn-back" aria-label="Volver">🏠</button>
+    <h3>YouTube</h3>
+    <span class="pill time" title="Minutos de premio que te quedan">▶️<b id="left">0:00</b></span>
+  </header>
+  <div class="yt-wrap" id="wrap"></div>
+</section>
+<script src="shared/config.js"></script>
+<script src="shared/kit.js?v=20261123"></script>
+<script>
+(function () {
+  'use strict';
+  const { $, Audio, Nav, Prizes, CFG, Time } = MK;
+  const HU = MK.Hucha, HON = !!(HU && HU.on); let wasRunning = false;
+  const wrap = $('#wrap'), left = $('#left');
+  const fmt = s => Time.fmt(s);
+  const URL = CFG.YOUTUBE_URL || 'https://m.youtube.com/';
+  $('#btn-back').addEventListener('click', () => Nav.home());
+  function card(emoji, title, text, btnText, onBtn, cls) {
+    wrap.innerHTML = `<div class="yt-card"><div class="big">${emoji}</div><h2>${title}</h2>${text}${btnText ? '<button class="btn btn-xl ' + (cls || 'btn-accent') + '" id="yt-btn">' + btnText + '</button>' : ''}</div>`;
+    if (btnText) $('#yt-btn').addEventListener('click', onBtn);
+  }
+  function openYoutube() {
+    Audio.unlock(); Audio.sfx('tada', .7);
+    Prizes.startYoutube();                      // desde ahora los minutos corren con el reloj
+    const w = window.open(URL, '_blank');       // en la tablet suele abrirse la app de YouTube
+    if (!w) location.href = URL;
+    render();
+  }
+  // M15 · con la hucha de casa encendida, YouTube se compra por minutos con créditos (o con el vale) y manda el tope del día
+  function huBuy(m) { const s = m * 60; if (HU.playable() < s) return render(); HU.spend(s, 'youtube'); HU.save(); Prizes.grant('youtube', s, 'hucha'); openYoutube(); }
+  function huRender() {
+    if (Prizes.youtubeRunning) { wasRunning = true; return false; }          // corriendo: vale la pantalla de siempre, con su cuenta atrás
+    if (wasRunning) { wasRunning = false; ended = false; Audio.sfx('ding', .8); MK.UI.toast('Se acabó el tiempo de YouTube. Ciérralo, por favor.', 4500); }
+    if (HU.playable() < 60 && HU.src !== 'vale' && HU.playable('vale') >= 60) HU.setSrc('vale');   // sin créditos pero con vale: se ofrece el vale
+    const can = Math.floor(HU.playable() / 60), vale = HU.src === 'vale', rate = HU.rate();
+    left.textContent = fmt(HU.playable()); left.parentNode.classList.remove('low');
+    if (can < 1) {
+      card('🔒', 'Hoy no hay YouTube', `<p>${HU.leftToday() < 60 ? 'Ya has gastado tus minutos de hoy.' : 'No te quedan créditos: cada ronda bien hecha te da 1.'} Tu hucha sigue creciendo cada noche.</p>`, 'Volver al móvil', () => Nav.home());
+      return true;
+    }
+    const opts = [5, 10, 15, 20, 30, 45].filter(m => m <= can); if (!opts.length) opts.push(can);
+    const src = HU.data.vale > 0 ? `<div class="yt-src"><button class="btn btn-sm ${vale ? 'btn-ghost' : 'btn-accent'}" data-src="cred">🐷 Créditos (${HU.credits})</button><button class="btn btn-sm ${vale ? 'btn-accent' : 'btn-ghost'}" data-src="vale">🎟️ Vale (${Math.floor(HU.data.vale / 60)} min)</button></div>` : '';
+    const precio = vale ? 'Vas a gastar tu vale.' : `Hoy es ${HU.DIAS[HU._now().getDay()]}: 1 minuto cuesta ${rate === 1 ? '1 crédito' : rate + ' créditos'}. Tienes ${HU.credits}.`;
+    const botones = opts.map(m => `<button class="btn btn-yt" data-m="${m}">${m} min${vale ? '' : `<small>${m * rate} ${m * rate === 1 ? 'crédito' : 'créditos'}</small>`}</button>`).join('');
+    wrap.innerHTML = `<div class="yt-card"><div class="big">▶️</div><h2>¿Cuántos minutos de YouTube?</h2><p>${precio} Hoy puedes ver hasta ${can} ${can === 1 ? 'minuto' : 'minutos'}.</p>${src}<div class="yt-opts">${botones}</div><p>Al tocar se abre YouTube y <b>empiezan a contar los minutos</b>. Cuando se acaben, cierra YouTube. Confiamos en ti.</p></div>`;
+    wrap.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => huBuy(+b.dataset.m)));
+    wrap.querySelectorAll('[data-src]').forEach(b => b.addEventListener('click', () => { HU.setSrc(b.dataset.src); render(); }));
+    return true;
+  }
+  let ended = false;
+  function render() {
+    if (HON && huRender()) return;
+    const secs = Prizes.youtubeSeconds; left.textContent = fmt(secs); left.parentNode.classList.toggle('low', secs > 0 && secs < 60);
+    if (secs <= 0) {
+      if (Prizes.youtubeRunning || ended) { if (!ended) { ended = true; Audio.sfx('ding', .8); } card('🎉', 'Se acabó el tiempo', '<p>Han pasado tus minutos de YouTube. ¡Enhorabuena otra vez por tu 10! Saca otro y vuelves a tener más.</p>', 'Volver al móvil', () => Nav.home()); return; }
+      card('🔒', 'Cerrado con candado', `<p>Saca un 10 en el examen de prueba (Ciencias Sociales o Natural Science) y tendrás ${CFG.EXAM10_MINUTES} minutos de YouTube.</p>`, 'Volver al móvil', () => Nav.home()); return;
+    }
+    if (Prizes.youtubeRunning) { ended = true; card('⏱️', 'Tu tiempo está corriendo', `<div class="count${secs < 60 ? ' low' : ''}" id="count">${fmt(secs)}</div><p>Cuando llegue a cero, cierra YouTube y vuelve a MariApps. Confiamos en ti.</p>`, 'Abrir YouTube otra vez', openYoutube, 'btn-yt'); return; }
+    card('▶️', `Tienes ${fmt(secs)} de YouTube`, `<p>Te lo has ganado con un 10. Al tocar el botón se abre YouTube y <b>empiezan a contar los minutos</b>, aunque vuelvas aquí. Cuando se acaben, cierra YouTube. Confiamos en ti.</p>`, 'Abrir YouTube', openYoutube, 'btn-yt');
+  }
+  render();
+  setInterval(() => { const c = $('#count'); if (c) { const s = Prizes.youtubeSeconds; c.textContent = fmt(s); c.classList.toggle('low', s < 60); left.textContent = fmt(s); if (s <= 0) render(); } }, 1000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') render(); });
+})();
+</script>
+</body>
+</html>
